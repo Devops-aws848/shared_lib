@@ -12,4 +12,12 @@ def call(String stageName){
      {
        sh "mvn clean deploy"
      }
+  else if ("${stageName}" == "deplot to app")
+     {
+       sh """
+          curl -u admin:password \
+          --upload-file /var/lib/jenkins/workspace/Bsnl/target/maven-web-application.war \
+          "http://65.2.40.197:8080/manager/text/deploy?path=/maven-web-application&update=trye" 
+          """
+     }
 }
